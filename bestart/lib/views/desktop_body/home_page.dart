@@ -1,6 +1,9 @@
 
 
+import 'package:bestart/widgets/drawer_widget.dart';
 import 'package:flutter/material.dart';
+
+import '../../widgets/appbar_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -8,8 +11,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Title'),),
-      body: Center(child: Text('Home'),),
+      appBar: AppBarWidget(),
+      drawer: DrawerWidget(),
+      body: Center(child: Text('Home page for desktop'),),
     );
   }
 }
