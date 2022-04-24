@@ -1,4 +1,6 @@
 
+
+import 'package:bestart/views/desktop_body/login_page.dart';
 import 'package:flutter/material.dart';
 
 class DesktopBody extends StatelessWidget {
@@ -6,10 +8,6 @@ class DesktopBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Desktop Body'),
-      ),
-    );
+    return LoginPage();
   }
 }
