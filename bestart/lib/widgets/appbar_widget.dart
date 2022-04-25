@@ -91,15 +91,18 @@ PreferredSizeWidget? AppBarWidget() {
           padding: const EdgeInsets.only(left: 8, right: 8),
           child: InkWell(
             onTap: () {
-              Get.toNamed('/profile');
+
             },
-            child: IconButton(
+            child: TextButton.icon(
               onPressed: () {
-                Get.toNamed('/profile');
               },
               icon: const Icon(
                 Icons.person,
                 color: Colors.black,
+              ),
+              label: Text(
+                '${my_current_user.read('email').toString()}',
+                style: TextStyle(color: Colors.black, fontSize: 12),
               ),
             ),
           ),
