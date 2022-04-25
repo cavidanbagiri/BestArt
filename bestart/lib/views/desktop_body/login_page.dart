@@ -32,70 +32,84 @@ class LoginPage extends GetView<LoginPageController> {
                   //color: Colors.greenAccent,
                   width: MediaQuery.of(context).size.width * 0.3,
                   height: MediaQuery.of(context).size.height * 0.8,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(bottom: 20, left: 10, top: 40),
-                        child: Text(
-                          'Sign In',
-                          style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Container(
-                        margin:
-                            EdgeInsets.only(bottom: 10, left: 10, right: 20),
-                        child: TextFormField(
-                          decoration: InputDecoration(hintText: 'Email'),
-                        ),
-                      ),
-                      Container(
-                        margin:
-                            EdgeInsets.only(bottom: 10, left: 10, right: 20),
-                        child: TextFormField(
-                          decoration: InputDecoration(hintText: 'Password'),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                            bottom: 20, left: 10, top: 20, right: 20),
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text('Sign In'),
+                  child: Form(
+                    key: controller.formState,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(bottom: 20, left: 10, top: 40),
+                          child: Text(
+                            'Sign In',
+                            style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.bold),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Container(
+                        Container(
+                          margin:
+                              EdgeInsets.only(bottom: 10, left: 10, right: 20),
+                          child: TextFormField(
+                            decoration: InputDecoration(hintText: 'Email'),
+                            controller: controller.email_controller,
+                            validator: (value){
+                              controller.validateEmail(value!);
+                            },
+                          ),
+                        ),
+                        Container(
+                          margin:
+                              EdgeInsets.only(bottom: 10, left: 10, right: 20),
+                          child: TextFormField(
+                            decoration: InputDecoration(hintText: 'Password'),
+                            controller: controller.password_controller,
+                            validator: (value){
+                              controller.validatePassword(value!);
+                            },
+                          ),
+                        ),
+                        Container(
                           margin: EdgeInsets.only(
                               bottom: 20, left: 10, top: 20, right: 20),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: InkWell(
-                                  child: Text('Don\'t You Have An Account?'),
-                                  onTap: () {},
-                                ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  margin: EdgeInsets.only(right: 10),
-                                  child: TextButton(
-                                    onPressed: () {
-                                      Get.toNamed(Routes.SIGNUP);
-                                    },
-                                    child: Text('Sign Up'),
-                                  ),
-                                ),
-                              )
-                            ],
+                          child: ElevatedButton(
+                            onPressed: () {
+                              controller.login(controller.email_controller.text,controller.password_controller.text );
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text('Sign In'),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                bottom: 20, left: 10, top: 20, right: 20),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: InkWell(
+                                    child: Text('Don\'t You Have An Account?'),
+                                    onTap: () {},
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    margin: EdgeInsets.only(right: 10),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Get.toNamed(Routes.SIGNUP);
+                                      },
+                                      child: Text('Sign Up'),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

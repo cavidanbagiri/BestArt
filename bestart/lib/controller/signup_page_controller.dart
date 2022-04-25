@@ -47,7 +47,7 @@ class SignUpController extends GetxController{
       }
       else{
         print('Enter here');
-        _auth_service.registration(email, password);
+        _auth_service.registrationFunc(email, password);
         formState.currentState!.save();
       }
     }catch(e){

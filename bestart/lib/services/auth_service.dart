@@ -9,7 +9,7 @@ class AuthService {
   FirebaseAuth auth = FirebaseAuth.instance;
 
   //Create Regostration function
-  Future<void> registration(String email, String password)async{
+  Future<void> registrationFunc(String email, String password)async{
     try{
       await auth.createUserWithEmailAndPassword(email: email, password: password);
       Get.toNamed(Routes.LOGIN);
@@ -20,5 +20,13 @@ class AuthService {
   }
 
   //Create Login Function
-
+  Future<void> loginFunc(String email, String password)async{
+    try{
+      await auth.signInWithEmailAndPassword(email: email, password: password);
+      Get.toNamed(Routes.HOME);
+    }
+    catch(e){
+      print('Error happen in Auth Service');
+    }
+  }
 }
