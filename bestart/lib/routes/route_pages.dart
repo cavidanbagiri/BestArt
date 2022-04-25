@@ -1,5 +1,7 @@
 
 
+import 'package:bestart/bindings/login_page_binding.dart';
+import 'package:bestart/bindings/signup_page_binding.dart';
 import 'package:bestart/routes/app_routes.dart';
 import 'package:bestart/utils/layout_seperator.dart';
 import 'package:bestart/views/desktop_body/home_page.dart';
@@ -12,7 +14,7 @@ class RoutePages{
   static final pages = [
     GetPage(name: Routes.LAYOUT_SEPERATOR, page: ()=>LayoutSeperator()),
     GetPage(name: Routes.HOME, page: ()=>HomePage()),
-    GetPage(name: Routes.LOGIN, page: ()=>LoginPage()),
-    GetPage(name: Routes.SIGNUP, page: ()=>SignUpPage()),
+    GetPage(name: Routes.LOGIN, page: ()=>LoginPage(), binding: LoginPageBindings()),
+    GetPage(name: Routes.SIGNUP, page: ()=>SignUpPage(), binding: SignUpBinding()),
   ];
 }

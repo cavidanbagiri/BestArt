@@ -1,10 +1,11 @@
+import 'package:bestart/controller/login_page_controller.dart';
 import 'package:bestart/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/appbar_widget.dart';
 import '../../widgets/drawer_widget.dart';
 import 'package:get/get.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends GetView<LoginPageController> {
   const LoginPage({Key? key}) : super(key: key);
 
   @override

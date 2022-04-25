@@ -1,10 +1,10 @@
 
+import 'package:bestart/controller/login_page_controller.dart';
 import 'package:bestart/routes/app_routes.dart';
 import 'package:bestart/routes/route_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +16,7 @@ Future<void> main() async {
           storageBucket: "first-getx-app.appspot.com",
           messagingSenderId: "900359479800",
           appId: "1:900359479800:web:2258a3fe64b332298f760d")
-  );
+  ).then((value) => LoginPageController());
   runApp(App());
 }
 
