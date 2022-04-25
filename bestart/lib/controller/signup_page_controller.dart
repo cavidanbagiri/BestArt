@@ -1,7 +1,7 @@
 
-import 'package:bestart/services/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'auth_controller.dart';
 
 class SignUpController extends GetxController{
 
@@ -12,8 +12,9 @@ class SignUpController extends GetxController{
   //Global Key For Form Validation
   GlobalKey<FormState> formState = GlobalKey<FormState>();
 
-  //For Using Auth Service
-  final _auth_service = AuthService();
+  //For Gettings Auth Controller
+  final _auth_controller = AuthController();
+
 
   //Initialize this controller
   @override
@@ -47,7 +48,7 @@ class SignUpController extends GetxController{
       }
       else{
         print('Enter here');
-        _auth_service.registrationFunc(email, password);
+        _auth_controller.registrationFunc(email, password);
         formState.currentState!.save();
       }
     }catch(e){

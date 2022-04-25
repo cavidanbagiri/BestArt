@@ -1,8 +1,8 @@
 
+import 'package:bestart/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../services/auth_service.dart';
+import 'package:get_storage/get_storage.dart';
 
 class LoginPageController extends GetxController{
 
@@ -13,8 +13,11 @@ class LoginPageController extends GetxController{
   //Global Key For Form Validation
   GlobalKey<FormState> formState = GlobalKey<FormState>();
 
-  //For Using Auth Service
-  final _auth_service = AuthService();
+  //For Gettings Auth Controller
+  final _auth_controller = AuthController();
+
+  //Create Get Storage Session and Adding Current User Email in the storage
+  final current_user = GetStorage('current_user');
 
   //Initialize this controller
   @override
@@ -45,8 +48,10 @@ class LoginPageController extends GetxController{
       return;
     }
     else{
-      await _auth_service.loginFunc(email, password);
+      await _auth_controller.loginFunc(email, password);
       formState.currentState!.save();
+      current_user.write('email', email);
+      current_user.write('isLogged', true);
     }
   }
 
