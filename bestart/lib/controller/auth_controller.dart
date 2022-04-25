@@ -10,9 +10,6 @@ class AuthController extends GetxController{
   //For Using Auth Service
   final auth_service = AuthService();
 
-  //Create an instance for Auth Controller
-  static AuthController instance = Get.find<AuthController>();
-
   //Create GetStorage
   final my_current_user = GetStorage('current_user');
 
