@@ -6,4 +6,5 @@ abstract class Routes{
   static final HOME = '/';
   static final LOGIN = '/login';
   static final SIGNUP = '/signup';
+  static final POSTARTICLEPAGE = '/articlepagepost';
 }

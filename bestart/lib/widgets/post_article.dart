@@ -1,9 +1,10 @@
+import 'package:bestart/routes/app_routes.dart';
+import 'package:bestart/views/post_article_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PostArticle extends StatelessWidget {
   PostArticle({Key? key}) : super(key: key);
-  TextEditingController _article_controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     // Get.put(PostArticleController());
@@ -26,14 +27,18 @@ class PostArticle extends StatelessWidget {
           Expanded(
             child: Container(
               margin: EdgeInsets.only(left: 20, right: 20),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Getting Article Page',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.teal)),
-                  labelText: 'Click For Writing Article',
+              child: InkWell(
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Getting Article Page',
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.teal)),
+                    labelText: 'Click For Writing Article',
+                  ),
+                  onTap: (){
+                    Get.toNamed(Routes.POSTARTICLEPAGE);
+                  },
                 ),
-                controller: _article_controller,
               ),
             ),
           ),
