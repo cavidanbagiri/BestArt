@@ -1,6 +1,7 @@
 
 
 import 'package:bestart/routes/app_routes.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../services/auth_service.dart';
@@ -33,6 +34,14 @@ class AuthController extends GetxController{
       await my_current_user.write('email',null);
       print('from logout ${my_current_user.read('isLogged')}');
       print('from logout ${my_current_user.read('email')}');
+      await Get.snackbar(
+        'Success Resgister',
+        'Success Regsitration',
+        snackPosition: SnackPosition.BOTTOM,
+        titleText: Text('Success Logout'),
+        messageText: Text('Succesfully Logout On Website'),
+        backgroundColor: Colors.green,
+      );
       await Get.toNamed(Routes.LOGIN);
     }
     catch(e){

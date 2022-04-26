@@ -1,5 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'auth_controller.dart';
 
@@ -39,11 +40,18 @@ class SignUpController extends GetxController{
     return null;
   }
 
-  void register(String email, String password){
+  Future<void> register(String email, String password)async{
     try{
       final isValid = formState.currentState!.validate();
       if(!isValid){
-        print('not Enter here');
+        await Get.snackbar(
+          'Success Resgister',
+          'Success Regsitration',
+          snackPosition: SnackPosition.BOTTOM,
+          titleText: Text('UnSuccess Resgister'),
+          messageText: Text('UnSuccesfully Register On Website'),
+          backgroundColor: Colors.red,
+        );
         return;
       }
       else{

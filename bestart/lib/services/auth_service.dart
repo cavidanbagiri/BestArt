@@ -1,5 +1,6 @@
 
 import 'package:bestart/routes/app_routes.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_storage/get_storage.dart';
@@ -17,6 +18,14 @@ class AuthService {
     try{
       await auth.createUserWithEmailAndPassword(email: email, password: password);
       Get.toNamed(Routes.LOGIN);
+      await Get.snackbar(
+        'Success Resgister',
+        'Success Regsitration',
+        snackPosition: SnackPosition.BOTTOM,
+        titleText: Text('Success Resgister'),
+        messageText: Text('Succesfully Register On Website'),
+        backgroundColor: Colors.green,
+      );
     }
     catch(e){
       print('Error From Auth Service');
@@ -28,9 +37,25 @@ class AuthService {
     try{
       await auth.signInWithEmailAndPassword(email: email, password: password);
       Get.toNamed(Routes.HOME);
+      await Get.snackbar(
+        'Success Resgister',
+        'Success Regsitration',
+        snackPosition: SnackPosition.BOTTOM,
+        titleText: Text('Success Login'),
+        messageText: Text('Succesfully Login On Website'),
+        backgroundColor: Colors.green,
+      );
     }
     catch(e){
       print('Error happen in Auth Service ${e.toString()}');
+      await Get.snackbar(
+        'Success Resgister',
+        'Success Regsitration',
+        snackPosition: SnackPosition.BOTTOM,
+        titleText: Text('UnSuccess Login'),
+        messageText: Text('UNSuccesfully Login On Website'),
+        backgroundColor: Colors.red,
+      );
     }
   }
 
