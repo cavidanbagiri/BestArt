@@ -1,3 +1,4 @@
+import 'package:bestart/models/article_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,6 +29,13 @@ class ArticleService {
   }
 
   //Read From Firebase
+  Stream<List<ArticleModel>> getArticles(){
+    return articles_references.snapshots().map((query){
+      return query.docs.map((doc) {
+        return ArticleModel.readData(doc);
+      }).toList();
+    });
 
+  }
 
 }
