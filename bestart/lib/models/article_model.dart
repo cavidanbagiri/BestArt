@@ -6,7 +6,7 @@ class ArticleModel {
   String ? id;
   String ? title;
   String ? subject;
-  String ? raiting;
+  int raiting=0;
   String ? email;
 
   ArticleModel(this.id, this.title, this.subject, this.raiting, this.email);
@@ -16,6 +16,7 @@ class ArticleModel {
     id = snapshot.id;
     title = snapshot['title'];
     subject = snapshot['subject'];
+    email = snapshot['email'];
   }
 
 }

@@ -1,14 +1,15 @@
+import 'package:bestart/controller/article_controller.dart';
 import 'package:bestart/widgets/each_article_widget.dart';
 import 'package:bestart/widgets/drawer_widget.dart';
 import 'package:bestart/widgets/main_body_widgets.dart';
 import 'package:bestart/widgets/post_article.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../../widgets/appbar_widget.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
+class HomePage extends GetView<ArticleController> {
+  HomePage({Key? key}) : super(key: key);
+  final controller = Get.put(ArticleController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

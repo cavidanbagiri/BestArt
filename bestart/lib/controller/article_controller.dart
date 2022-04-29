@@ -10,7 +10,10 @@ class ArticleController extends GetxController{
 
   //Create an Auth Service
   final _article_service = ArticleService();
-  
+
+  //Create static instance
+  static ArticleController get instance => Get.find<ArticleController>();
+
   //Create Get Storage For taking User email
   final current_user = GetStorage('current_user');
 
@@ -21,23 +24,14 @@ class ArticleController extends GetxController{
   //Create Article Modul instance list
   RxList<ArticleModel>? article_model_list = RxList<ArticleModel>([]);
 
+
   @override
   onInit(){
     title_controller = TextEditingController();
     subject_controller = TextEditingController();
     article_model_list?.bindStream(_article_service.getArticles());
-    print('article cont work and ${current_user.read('email')}');
+    // print('article cont work and ${current_user.read('email')}');
     super.onInit();
-  }
-
-  //Read From Data
-  void readdata(){
-    print('Read data work');
-    for(int i=0;i<article_model_list!.length;i++){
-      print(article_model_list![i].id);
-      print(article_model_list![i].title);
-      print(article_model_list![i].subject);
-    }
   }
 
   //Add Article ro Firebase
@@ -48,6 +42,9 @@ class ArticleController extends GetxController{
       print('Error Happen Inside ArticleController ${e.toString()}');
     }
   }
+
+
+  //
 
   @override
   void onClose() {

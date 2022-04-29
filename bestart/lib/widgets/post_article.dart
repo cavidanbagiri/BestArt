@@ -13,7 +13,7 @@ class PostArticle extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         color: Colors.white,
       ),
-      width: MediaQuery.of(context).size.width * 0.70,
+      width: MediaQuery.of(context).size.width * 0.7,
       height: 70,
       margin: const EdgeInsets.only(top: 20, bottom: 20, right: 10, left: 10),
       child: Row(

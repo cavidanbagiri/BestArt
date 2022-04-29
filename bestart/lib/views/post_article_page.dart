@@ -42,14 +42,6 @@ class PostArticlePage extends GetView<ArticleController> {
                 child: Text('Post'),
               ),
             ),
-            Container(
-              child: ElevatedButton(
-                onPressed: () {
-                  controller.readdata();
-                },
-                child: Text('Read'),
-              ),
-            ),
           ],
         ),
       ),

@@ -18,6 +18,7 @@ class ArticleService {
         'title': title,
         'subject': subject,
         'email': email,
+        'raiting':0
       });
       await Get.snackbar('Article Added', 'Article Added',
           snackPosition: SnackPosition.BOTTOM,
@@ -35,7 +36,17 @@ class ArticleService {
         return ArticleModel.readData(doc);
       }).toList();
     });
+  }
 
+  //Read With Article
+  Future<ArticleModel?>getArticleWithId(String id)async{
+    final current_article = await articles_references.doc(id);
+    final snapshot = await current_article.get();
+    if (snapshot.exists){
+      final ss = ArticleModel.readData(snapshot);
+      print(ss.title);
+      return ArticleModel.readData(snapshot);
+    }
   }
 
 }

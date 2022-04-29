@@ -1,9 +1,16 @@
+import 'package:bestart/controller/article_controller.dart';
+import 'package:bestart/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class EachArticleWidget extends StatelessWidget {
+class EachArticleWidget extends GetView<ArticleController> {
   EachArticleWidget({Key? key}) : super(key: key);
-  String user_name = "Cavidan Baghirli";
-  String article_name = "How Can You Use Dart Programming Language Corretly";
+  String ?user_email;
+  String ?article_title;
+  String ?article_subject;
+  int ?raiting;
+  String ? id;
+  EachArticleWidget.write(this.user_email,this.article_title, this.article_subject, this.raiting, this.id);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,7 +20,9 @@ class EachArticleWidget extends StatelessWidget {
           color: Colors.white,
         ),
         child: InkWell(
-          onTap: (){},
+          onTap: (){
+            Get.toNamed(Routes.ARTICLEDETAIL, arguments: id);
+          },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -27,7 +36,7 @@ class EachArticleWidget extends StatelessWidget {
                   children: [
                     IconButton(
                         onPressed: () {}, icon: Icon(Icons.arrow_upward)),
-                    Text('12'),
+                    Text('${this.raiting}'),
                     IconButton(
                         onPressed: () {}, icon: Icon(Icons.arrow_downward)),
                   ],
@@ -62,7 +71,7 @@ class EachArticleWidget extends StatelessWidget {
                     Expanded(
                       child: Container(
                           child: Text(
-                            '${article_name}',
+                            '${article_title}',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 13),
                           )),
@@ -71,7 +80,7 @@ class EachArticleWidget extends StatelessWidget {
                     Expanded(
                       child: Container(
                         child: Text(
-                          'Posted By ${user_name}      Posted Time : 16.03.2022 ',
+                          'Posted By ${this.user_email}      Posted Time : 16.03.2022 ',
                           style: TextStyle(
                             fontSize: 11,
                           ),
