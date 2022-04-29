@@ -6,8 +6,8 @@ import '../../widgets/drawer_widget.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends GetView<LoginPageController> {
-  const LoginPage({Key? key}) : super(key: key);
 
+  LoginPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,10 +50,11 @@ class LoginPage extends GetView<LoginPageController> {
                           margin:
                               EdgeInsets.only(bottom: 10, left: 10, right: 20),
                           child: TextFormField(
-                            decoration: InputDecoration(hintText: 'Email'),
+                            decoration: InputDecoration(hintText: 'Email',
+                            prefixIcon: Icon(Icons.email)),
                             controller: controller.email_controller,
                             validator: (value){
-                              controller.validateEmail(value!);
+                              return controller.validateEmail(value!);
                             },
                           ),
                         ),
@@ -61,10 +62,11 @@ class LoginPage extends GetView<LoginPageController> {
                           margin:
                               EdgeInsets.only(bottom: 10, left: 10, right: 20),
                           child: TextFormField(
-                            decoration: InputDecoration(hintText: 'Password'),
+                            decoration: InputDecoration(hintText: 'Password',
+                            prefixIcon: Icon(Icons.password)),
                             controller: controller.password_controller,
                             validator: (value){
-                              controller.validatePassword(value!);
+                              return controller.validatePassword(value!);
                             },
                           ),
                         ),

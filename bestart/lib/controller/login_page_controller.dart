@@ -1,8 +1,8 @@
 
-import 'package:bestart/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'auth_controller.dart';
 
 class LoginPageController extends GetxController{
 
@@ -15,6 +15,9 @@ class LoginPageController extends GetxController{
 
   //For Gettings Auth Controller
   final _auth_controller = AuthController();
+
+  //For Gettings Auth Controller
+  //final _auth_controller = AuthController();
 
   //Create Get Storage Session and Adding Current User Email in the storage
   final current_user = GetStorage('current_user');
@@ -54,5 +57,6 @@ class LoginPageController extends GetxController{
       current_user.write('isLogged', true);
     }
   }
+
 
 }

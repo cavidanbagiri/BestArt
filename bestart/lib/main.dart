@@ -17,7 +17,7 @@ Future<void> main() async {
           storageBucket: "first-getx-app.appspot.com",
           messagingSenderId: "900359479800",
           appId: "1:900359479800:web:2258a3fe64b332298f760d")
-  ).then((value) => AuthController());
+  );
   //Adding Get Storage To The Project
   await GetStorage.init();
   runApp(App());

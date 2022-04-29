@@ -1,13 +1,13 @@
 import 'package:bestart/controller/auth_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
 
 import '../routes/app_routes.dart';
 
 PreferredSizeWidget? AppBarWidget() {
   Get.lazyPut(() => AuthController());
-  final my_current_user = GetStorage('current_user');
+  FirebaseAuth auth = FirebaseAuth.instance;
   return PreferredSize(
     preferredSize: Size.fromHeight(40.0),
     child: AppBar(
@@ -101,14 +101,14 @@ PreferredSizeWidget? AppBarWidget() {
                 color: Colors.black,
               ),
               label: Text(
-                '${my_current_user.read('email').toString()}',
+                '${auth.currentUser?.email.toString()}',
                 style: TextStyle(color: Colors.black, fontSize: 12),
               ),
             ),
           ),
         ),
 
-        my_current_user.read('isLogged') != true
+        auth.currentUser?.email == null
             ? Padding(
                 padding: const EdgeInsets.only(left: 8, right: 8),
                 child: InkWell(

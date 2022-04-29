@@ -19,8 +19,6 @@ class AuthController extends GetxController{
     try{
       await auth_service.loginFunc(email, password);
       await my_current_user.write('isLogged',true);
-      print('from login ${my_current_user.read('isLogged')}');
-      print('from login ${my_current_user.read('email')}');
     }
     catch(e){
       print('Error inside of auth_controller');
@@ -30,6 +28,7 @@ class AuthController extends GetxController{
   Future<void> logoutFunc()async{
     try{
       await auth_service.logoutFunc();
+      await Get.toNamed(Routes.HOME);
       await my_current_user.write('isLogged',false);
       await my_current_user.write('email',null);
       print('from logout ${my_current_user.read('isLogged')}');
@@ -42,7 +41,6 @@ class AuthController extends GetxController{
         messageText: Text('Succesfully Logout On Website'),
         backgroundColor: Colors.green,
       );
-      await Get.toNamed(Routes.LOGIN);
     }
     catch(e){
       print('Logout Happen ${e.toString()}');

@@ -63,6 +63,7 @@ class AuthService {
   Future<void> logoutFunc()async{
     try{
       await auth.signOut();
+      print('${auth.currentUser!.email} is happened');
     }
     catch(e){
       print('Logout Error ${e.toString()}');
