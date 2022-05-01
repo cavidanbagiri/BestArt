@@ -1,5 +1,5 @@
 import 'package:bestart/routes/app_routes.dart';
-import 'package:bestart/views/post_article_page.dart';
+import 'package:bestart/views/desktop_body/post_article_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

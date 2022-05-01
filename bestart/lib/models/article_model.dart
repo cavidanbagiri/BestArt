@@ -17,6 +17,7 @@ class ArticleModel {
     title = snapshot['title'];
     subject = snapshot['subject'];
     email = snapshot['email'];
+    raiting = snapshot['raiting'];
   }
 
 }

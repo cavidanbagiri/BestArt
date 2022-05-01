@@ -2,8 +2,8 @@ import 'package:bestart/controller/article_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../widgets/appbar_widget.dart';
-import '../widgets/drawer_widget.dart';
+import '../../widgets/appbar_widget.dart';
+import '../../widgets/drawer_widget.dart';
 
 class PostArticlePage extends GetView<ArticleController> {
   PostArticlePage({Key? key}) : super(key: key);

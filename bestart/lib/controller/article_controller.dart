@@ -24,6 +24,8 @@ class ArticleController extends GetxController{
   //Create Article Modul instance list
   RxList<ArticleModel>? article_model_list = RxList<ArticleModel>([]);
 
+  //For updating raiting with obx
+  RxInt rate=0.obs;
 
   @override
   onInit(){
@@ -32,6 +34,29 @@ class ArticleController extends GetxController{
     article_model_list?.bindStream(_article_service.getArticles());
     // print('article cont work and ${current_user.read('email')}');
     super.onInit();
+  }
+
+  //Voute App
+  Future<void> vouteAppRaiting(String ?id, int raiting)async{
+    try{
+      await _article_service.vouteAppRaiting(id, raiting);
+      rate.value = raiting+1;
+    }
+    catch(e){
+      print('upp error');
+    }
+    update();
+  }
+
+  //Voute App
+  Future<void> vouteDownRaiting(String ?id, int raiting)async{
+    try{
+      await _article_service.vouteDownRaiting(id, raiting);
+      rate.value = raiting-1;
+    }catch(e){
+      print('down error');
+    }
+    update();
   }
 
   //Add Article ro Firebase
@@ -43,8 +68,6 @@ class ArticleController extends GetxController{
     }
   }
 
-
-  //
 
   @override
   void onClose() {

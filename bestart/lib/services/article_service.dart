@@ -49,4 +49,33 @@ class ArticleService {
     }
   }
 
+
+  //Voute App
+  Future<void> vouteAppRaiting(String ?id, int raiting)async{
+    try{
+      final current_article = await articles_references.doc(id);
+      current_article.update({
+        'raiting':raiting+=1
+      });
+      print('execute command');
+    }
+    catch(e){
+      print('Raiting cant up');
+    }
+  }
+
+  //Voute App
+  Future<void> vouteDownRaiting(String ?id, int raiting)async{
+    try{
+      final current_article = await articles_references.doc(id);
+      current_article.update({
+        'raiting':raiting-=1
+      });
+      print('execute command');
+    }
+    catch(e){
+      print('Raiting cant up');
+    }
+  }
+
 }

@@ -1,44 +1,53 @@
 import 'package:bestart/controller/article_controller.dart';
+import 'package:bestart/models/article_model.dart';
 import 'package:bestart/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controller/article_detail_controller.dart';
+
 class EachArticleWidget extends GetView<ArticleController> {
+  final article_detail_controller = Get.put(ArticleDetailController());
   EachArticleWidget({Key? key}) : super(key: key);
-  String ?user_email;
-  String ?article_title;
-  String ?article_subject;
-  int ?raiting;
-  String ? id;
-  EachArticleWidget.write(this.user_email,this.article_title, this.article_subject, this.raiting, this.id);
+  EachArticleWidget.write(this.model, this.index);
+  var model;
+  int? index;
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(top:10),
+        margin: const EdgeInsets.only(top: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: Colors.white,
         ),
         child: InkWell(
-          onTap: (){
-            Get.toNamed(Routes.ARTICLEDETAIL, arguments: id);
+          onTap: () {
+            Get.toNamed(Routes.ARTICLEDETAIL, arguments: model?.id);
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               //Yes Or Not Section
               Container(
-                margin: EdgeInsets.only(left: 5),
-                decoration: BoxDecoration(
+                margin: const EdgeInsets.only(left: 5),
+                decoration: const BoxDecoration(
                   color: Color.fromRGBO(250, 250, 250, 1),
                 ),
                 child: Column(
                   children: [
                     IconButton(
-                        onPressed: () {}, icon: Icon(Icons.arrow_upward)),
-                    Text('${this.raiting}'),
+                        onPressed: () {
+                          controller.vouteAppRaiting(
+                              model?.id, model!.raiting);
+                        },
+                        icon: const Icon(Icons.arrow_upward)),
+                    Obx(()=>Text('${controller.article_model_list![index!].raiting}')),
                     IconButton(
-                        onPressed: () {}, icon: Icon(Icons.arrow_downward)),
+                        onPressed: () {
+                          controller.vouteDownRaiting(
+                              model?.id, model!.raiting);
+                        },
+                        icon: const Icon(Icons.arrow_downward)),
                   ],
                 ),
               ),
@@ -46,11 +55,11 @@ class EachArticleWidget extends GetView<ArticleController> {
               Container(
                 child: Center(
                   child: Container(
-                    margin: EdgeInsets.only(left: 10),
+                    margin: const EdgeInsets.only(left: 10),
                     height: 80,
                     width: 100,
-                    color: Color.fromRGBO(250, 250, 250, 1),
-                    child: Icon(
+                    color: const Color.fromRGBO(250, 250, 250, 1),
+                    child: const Icon(
                       Icons.image,
                       size: 35,
                       color: Colors.black54,
@@ -61,8 +70,8 @@ class EachArticleWidget extends GetView<ArticleController> {
               //Information Section
               Container(
                 height: 100,
-                margin: EdgeInsets.only(left: 20),
-                padding: EdgeInsets.only(top: 8, bottom: 8),
+                margin: const EdgeInsets.only(left: 20),
+                padding: const EdgeInsets.only(top: 8, bottom: 8),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,17 +80,17 @@ class EachArticleWidget extends GetView<ArticleController> {
                     Expanded(
                       child: Container(
                           child: Text(
-                            '${article_title}',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 13),
-                          )),
+                        '${model?.title}',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 13),
+                      )),
                     ),
                     //User Information Section
                     Expanded(
                       child: Container(
                         child: Text(
-                          'Posted By ${this.user_email}      Posted Time : 16.03.2022 ',
-                          style: TextStyle(
+                          'Posted By ${model?.email}      Posted Time : 16.03.2022 ',
+                          style: const TextStyle(
                             fontSize: 11,
                           ),
                         ),
@@ -94,8 +103,11 @@ class EachArticleWidget extends GetView<ArticleController> {
                           //Comment
                           Container(
                             child: Row(
-                              children: [
-                                Icon(Icons.comment, size: 20,),
+                              children: const [
+                                Icon(
+                                  Icons.comment,
+                                  size: 20,
+                                ),
                                 Text(
                                   'Comment',
                                   style: TextStyle(
@@ -107,10 +119,13 @@ class EachArticleWidget extends GetView<ArticleController> {
                           ),
                           //Share
                           Container(
-                            margin: EdgeInsets.only(left:10),
+                            margin: EdgeInsets.only(left: 10),
                             child: Row(
-                              children: [
-                                Icon(Icons.share,  size: 20,),
+                              children: const [
+                                Icon(
+                                  Icons.share,
+                                  size: 20,
+                                ),
                                 Text(
                                   'Share',
                                   style: TextStyle(
@@ -122,10 +137,13 @@ class EachArticleWidget extends GetView<ArticleController> {
                           ),
                           //Download
                           Container(
-                            margin: EdgeInsets.only(left:10),
+                            margin: EdgeInsets.only(left: 10),
                             child: Row(
-                              children: [
-                                Icon(Icons.download,  size: 20,),
+                              children: const [
+                                Icon(
+                                  Icons.download,
+                                  size: 20,
+                                ),
                                 Text(
                                   'Download',
                                   style: TextStyle(
@@ -137,9 +155,9 @@ class EachArticleWidget extends GetView<ArticleController> {
                           ),
                           //Read
                           Container(
-                            margin: EdgeInsets.only(left:10),
+                            margin: EdgeInsets.only(left: 10),
                             child: Row(
-                              children: [
+                              children: const [
                                 Icon(Icons.read_more),
                                 Text(
                                   'Read',

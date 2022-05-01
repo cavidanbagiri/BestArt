@@ -1,9 +1,6 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-
 import '../models/article_model.dart';
 import '../services/article_service.dart';
 
@@ -11,14 +8,14 @@ class ArticleDetailController extends GetxController{
   //Create an Auth Service
   final _article_service = ArticleService();
 
-  //Create Get Storage For taking User email
-  //final current_user = GetStorage('current_user');
-
   //Create Controller
   TextEditingController? title_controller;
   TextEditingController? subject_controller;
 
-  ArticleModel? temp;
+  var temp;
+
+  //For updating raiting with obx
+  RxInt rate=0.obs;
 
   @override
   onInit(){
@@ -27,15 +24,34 @@ class ArticleDetailController extends GetxController{
     super.onInit();
   }
 
-  //read with article id
-  Future<ArticleModel?> getArticleWithId(String id)async{
-    temp= await _article_service.getArticleWithId(id) as ArticleModel;
-    print('here');
-    print(temp?.title.toString());
-    return temp;
+  //Voute App
+  Future<void> vouteAppRaiting(String ?id, int raiting)async{
+    try{
+      await _article_service.vouteAppRaiting(id, raiting);
+      rate.value = raiting+1;
+    }
+    catch(e){
+      print('upp error');
+    }
+    update();
   }
 
-  //
+  //Voute App
+  Future<void> vouteDownRaiting(String ?id, int raiting)async{
+    try{
+      await _article_service.vouteDownRaiting(id, raiting);
+      rate.value = raiting-1;
+    }catch(e){
+      print('down error');
+    }
+    update();
+  }
+
+  //read with article id
+  Future<ArticleModel?> getArticleWithId(String id)async{
+    temp= await _article_service.getArticleWithId(id);
+    return temp;
+  }
 
   @override
   void onClose() {

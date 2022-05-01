@@ -1,4 +1,3 @@
-
 import 'package:bestart/controller/article_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,15 +13,12 @@ class MainBodyWidgets extends GetView<ArticleController> {
       margin: const EdgeInsets.only(right: 15, left: 15),
       child: ListView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: controller.article_model_list!.length,
+        itemCount: controller.article_model_list?.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return EachArticleWidget.write(
-                controller.article_model_list![index].email,
-                controller.article_model_list![index].title,
-                controller.article_model_list![index].subject,
-                controller.article_model_list![index].raiting,
-                controller.article_model_list![index].id,
+            controller.article_model_list?[index],
+            index,
           );
         },
       ),

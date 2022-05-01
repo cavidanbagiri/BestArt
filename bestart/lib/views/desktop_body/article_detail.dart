@@ -4,8 +4,8 @@ import 'package:bestart/models/article_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../widgets/appbar_widget.dart';
-import '../widgets/drawer_widget.dart';
+import '../../widgets/appbar_widget.dart';
+import '../../widgets/drawer_widget.dart';
 
 class ArticleDetail extends GetView<ArticleDetailController> {
 
