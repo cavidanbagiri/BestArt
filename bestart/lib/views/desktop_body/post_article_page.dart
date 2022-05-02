@@ -36,8 +36,7 @@ class PostArticlePage extends GetView<ArticleController> {
                 onPressed: () {
                   controller.addArticle(
                       controller.title_controller!.text,
-                      controller.subject_controller!.text,
-                      controller.current_user.read('email'));
+                      controller.subject_controller!.text);
                 },
                 child: Text('Post'),
               ),

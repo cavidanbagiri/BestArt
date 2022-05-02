@@ -19,17 +19,17 @@ class PostArticle extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            child: CircleAvatar(
+            child: const CircleAvatar(
               backgroundImage: AssetImage('assets/img/first.jpg'),
             ),
             margin: const EdgeInsets.only(left: 10),
           ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(left: 20, right: 20),
+              margin: const EdgeInsets.only(left: 20, right: 20),
               child: InkWell(
                 child: TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Getting Article Page',
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.teal)),

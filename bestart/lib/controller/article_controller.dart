@@ -2,6 +2,7 @@
 import 'package:bestart/models/article_model.dart';
 import 'package:bestart/services/article_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -16,6 +17,9 @@ class ArticleController extends GetxController{
 
   //Create Get Storage For taking User email
   final current_user = GetStorage('current_user');
+
+  //Firebase Auth
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   //Create Controller
   TextEditingController? title_controller;
@@ -58,9 +62,9 @@ class ArticleController extends GetxController{
   }
 
   //Add Article ro Firebase
-  Future<void> addArticle(String title, String subject, String email)async{
+  Future<void> addArticle(String title, String subject)async{
     try{
-      _article_service.addArticle(title, subject, email);
+      _article_service.addArticle(title, subject, auth.currentUser!.email.toString());
     }catch(e){
       print('Error Happen Inside ArticleController ${e.toString()}');
     }
