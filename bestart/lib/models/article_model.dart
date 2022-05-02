@@ -9,6 +9,7 @@ class ArticleModel {
   List ? raiting;
   String ? email;
   List ? comments;
+  Timestamp ? time;
 
   ArticleModel(this.id, this.title, this.subject, this.raiting, this.email, this.comments);
 
@@ -20,6 +21,7 @@ class ArticleModel {
     email = snapshot['email'];
     raiting = snapshot['raiting'];
     comments = snapshot['comments'];
+    time = snapshot['time'];
   }
 
 }

@@ -1,8 +1,9 @@
 import 'package:bestart/controller/article_controller.dart';
-import 'package:bestart/models/article_model.dart';
 import 'package:bestart/routes/app_routes.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../controller/article_detail_controller.dart';
 
@@ -11,6 +12,11 @@ class EachArticleWidget extends GetView<ArticleController> {
   EachArticleWidget.write(this.model, this.index);
   var model;
   int? index;
+  String getDateTime(DateTime t){
+    final DateFormat format = DateFormat('yyyy-MM-dd');
+    String formatted = format.format(t);
+    return formatted;
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -88,7 +94,7 @@ class EachArticleWidget extends GetView<ArticleController> {
                     Expanded(
                       child: Container(
                         child: Text(
-                          'Posted By ${model?.email}      Posted Time : 16.03.2022 ',
+                          'Posted By ${model?.email}      Posted Time : ${getDateTime(model?.time.toDate())} ',
                           style: const TextStyle(
                             fontSize: 11,
                           ),
