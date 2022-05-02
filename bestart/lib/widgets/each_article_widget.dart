@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import '../controller/article_detail_controller.dart';
 
 class EachArticleWidget extends GetView<ArticleController> {
-  final article_detail_controller = Get.put(ArticleDetailController());
   EachArticleWidget({Key? key}) : super(key: key);
   EachArticleWidget.write(this.model, this.index);
   var model;

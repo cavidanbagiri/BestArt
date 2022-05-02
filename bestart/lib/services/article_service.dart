@@ -39,14 +39,18 @@ class ArticleService {
   }
 
   //Read With Article
-  Future<ArticleModel?>getArticleWithId(String id)async{
+  @deprecated
+  Future<Rx<ArticleModel>> getArticleWithId(String id)async{
+    // print('bura isledi ///////////////////////////////////');
+    // temp = await _article_service.getArticleWithId(id) as Rx<ArticleModel?>;
+    // print('ama bura yox');
+    // print(' value is ${temp.value?.title}');
+    // return temp as Rx<ArticleModel>;
+    //return await _article_service.getArticleWithId(id) as Rx<ArticleModel?>;
     final current_article = await articles_references.doc(id);
     final snapshot = await current_article.get();
-    if (snapshot.exists){
-      final ss = ArticleModel.readData(snapshot);
-      print(ss.title);
-      return ArticleModel.readData(snapshot);
-    }
+    return ArticleModel.readData(snapshot).obs;
+    //await _article_service.getArticleWithId(id);
   }
 
 

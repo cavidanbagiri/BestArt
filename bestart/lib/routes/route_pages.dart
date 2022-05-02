@@ -6,7 +6,7 @@ import 'package:bestart/bindings/login_page_binding.dart';
 import 'package:bestart/bindings/signup_page_binding.dart';
 import 'package:bestart/routes/app_routes.dart';
 import 'package:bestart/utils/layout_seperator.dart';
-import 'package:bestart/views/desktop_body/article_detail.dart';
+import 'package:bestart/views/desktop_body/article_detail_page.dart';
 import 'package:bestart/views/desktop_body/home_page.dart';
 import 'package:bestart/views/desktop_body/signup_page.dart';
 import 'package:bestart/views/desktop_body/post_article_page.dart';

@@ -40,7 +40,6 @@ class ArticleController extends GetxController{
   Future<void> vouteAppRaiting(String ?id, int raiting)async{
     try{
       await _article_service.vouteAppRaiting(id, raiting);
-      rate.value = raiting+1;
     }
     catch(e){
       print('upp error');
@@ -52,7 +51,6 @@ class ArticleController extends GetxController{
   Future<void> vouteDownRaiting(String ?id, int raiting)async{
     try{
       await _article_service.vouteDownRaiting(id, raiting);
-      rate.value = raiting-1;
     }catch(e){
       print('down error');
     }

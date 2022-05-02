@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../models/article_model.dart';
@@ -12,10 +13,12 @@ class ArticleDetailController extends GetxController{
   TextEditingController? title_controller;
   TextEditingController? subject_controller;
 
-  var temp;
+  late Rx<ArticleModel> temp;
 
-  //For updating raiting with obx
-  RxInt rate=0.obs;
+  CollectionReference articles_references =
+  FirebaseFirestore.instance.collection('allarticles');
+
+  var raiting_cont = 0.obs;
 
   @override
   onInit(){
@@ -28,28 +31,29 @@ class ArticleDetailController extends GetxController{
   Future<void> vouteAppRaiting(String ?id, int raiting)async{
     try{
       await _article_service.vouteAppRaiting(id, raiting);
-      rate.value = raiting+1;
+      raiting_cont.value = raiting_cont.value+1;
     }
     catch(e){
-      print('upp error');
+      print('upp error ${e}');
     }
-    update();
+    //update();
   }
 
-  //Voute App
   Future<void> vouteDownRaiting(String ?id, int raiting)async{
     try{
       await _article_service.vouteDownRaiting(id, raiting);
-      rate.value = raiting-1;
     }catch(e){
-      print('down error');
+      print('down error ${e}');
     }
-    update();
+    //update();
   }
 
   //read with article id
-  Future<ArticleModel?> getArticleWithId(String id)async{
-    temp= await _article_service.getArticleWithId(id);
+  Future<Rx<ArticleModel>> getArticleWithId(String id)async{
+    final current_article = await articles_references.doc(id);
+    final snapshot = await current_article.get();
+    temp = ArticleModel.readData(snapshot).obs;
+    raiting_cont.value = temp.value.raiting;
     return temp;
   }
 
