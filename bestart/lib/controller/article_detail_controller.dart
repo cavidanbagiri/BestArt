@@ -18,8 +18,6 @@ class ArticleDetailController extends GetxController{
   CollectionReference articles_references =
   FirebaseFirestore.instance.collection('allarticles');
 
-  var raiting_cont = 0.obs;
-
   @override
   onInit(){
     title_controller = TextEditingController();
@@ -31,13 +29,13 @@ class ArticleDetailController extends GetxController{
   Future<void> vouteAppRaiting(String ?id, int raiting)async{
     try{
       await _article_service.vouteAppRaiting(id, raiting);
-      raiting_cont.value = raiting_cont.value+1;
     }
     catch(e){
       print('upp error ${e}');
     }
     //update();
   }
+
 
   Future<void> vouteDownRaiting(String ?id, int raiting)async{
     try{
@@ -53,7 +51,6 @@ class ArticleDetailController extends GetxController{
     final current_article = await articles_references.doc(id);
     final snapshot = await current_article.get();
     temp = ArticleModel.readData(snapshot).obs;
-    raiting_cont.value = temp.value.raiting;
     return temp;
   }
 

@@ -8,9 +8,18 @@ import 'package:get/get.dart';
 import '../../widgets/appbar_widget.dart';
 import '../../widgets/drawer_widget.dart';
 
-class ArticleDetail extends GetView<ArticleDetailController> {
+class ArticleDetail extends StatefulWidget {
   ArticleDetail({Key? key, this.article_id}) : super(key: key);
   String? article_id;
+
+  @override
+  State<ArticleDetail> createState() => _ArticleDetailState();
+}
+
+class _ArticleDetailState extends State<ArticleDetail> {
+  var controller = Get.put(ArticleDetailController());
+
+  late Future<Rx<ArticleModel>> dataFuture = controller.getArticleWithId(Get.arguments.toString());
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +27,8 @@ class ArticleDetail extends GetView<ArticleDetailController> {
         appBar: AppBarWidget(),
         drawer: DrawerWidget(),
         body: FutureBuilder<Rx<ArticleModel?>>(
-            future: controller.getArticleWithId(Get.arguments.toString()),
+            //future: controller.getArticleWithId(Get.arguments.toString()),
+            future: dataFuture,
             builder: (context, snapshots){
               if(snapshots.hasError){
                 final error = snapshots.error;
@@ -26,16 +36,24 @@ class ArticleDetail extends GetView<ArticleDetailController> {
                 return Text('error');
               }
               if(snapshots.hasData){
-                Rx<ArticleModel> data = snapshots.data as Rx<ArticleModel>;
+                var data = snapshots.data as Rx<ArticleModel>;
+                print('bura girdi');
                 return Column(
                   children: [
                     Text('Create by me'),
                     Text('${data.value.title}'),
                     Text('${data.value.subject}'),
-                    Obx(()=>Text('${controller.raiting_cont}'),),
+                    //Obx(()=>Text('${controller.raiting_cont}'),),
+                    Obx(()=>Text('${data.value.raiting}'),),
                     IconButton(onPressed: (){
                       print('clicked up');
                       controller.vouteAppRaiting(data.value.id, data.value.raiting);
+                      setState(() {
+                        dataFuture = controller.getArticleWithId(Get.arguments.toString());
+                      });
+                      //dataFuture = controller.dataFutureMethod(data.value.id.toString(), data);
+                      //dataFuture = data.
+                      //data.value.raiting = data.value.raiting+1;
                     }, icon: Icon(Icons.arrow_upward)),
                     IconButton(onPressed: (){
                       print('clicked down');
