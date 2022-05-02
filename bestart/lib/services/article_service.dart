@@ -18,7 +18,9 @@ class ArticleService {
         'title': title,
         'subject': subject,
         'email': email,
-        'raiting':0
+        'raiting':[],
+        'comments':[],
+        'time':DateTime.now()
       });
       await Get.snackbar('Article Added', 'Article Added',
           snackPosition: SnackPosition.BOTTOM,
