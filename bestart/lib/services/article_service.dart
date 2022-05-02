@@ -31,11 +31,21 @@ class ArticleService {
 
   //Read From Firebase
   Stream<List<ArticleModel>> getArticles(){
-    return articles_references.snapshots().map((query){
-      return query.docs.map((doc) {
-        return ArticleModel.readData(doc);
-      }).toList();
-    });
+    try{
+      return articles_references.snapshots().map((query){
+        return query.docs.map((doc) {
+          return ArticleModel.readData(doc);
+        }).toList();
+      });
+    }
+    catch(e){
+      print('error happeb here ${e.toString()}');
+      return articles_references.snapshots().map((query){
+        return query.docs.map((doc) {
+          return ArticleModel.readData(doc);
+        }).toList();
+      });
+    }
   }
 
   //Read With Article
@@ -65,25 +75,31 @@ class ArticleService {
   }
 
   //Voute App
-  Future<void> vouteAppRaiting(String ?id, int raiting)async{
+  Future<void> vouteAppRaiting(String ?id, int raiting, String email)async{
     try{
       final current_article = await articles_references.doc(id);
       current_article.update({
-        'raiting':raiting+=1
-      });
-      print('execute command');
+        'raiting':
+          FieldValue.arrayUnion([
+           email
+          ])
+      }).then((value) => print('operation execute')).catchError(()=>print('error happen'));
+      //print('execute command');
     }
     catch(e){
-      print('Raiting cant up');
+      print('Raiting cant up ${e.toString()}');
     }
   }
 
   //Voute App
-  Future<void> vouteDownRaiting(String ?id, int raiting)async{
+  Future<void> vouteDownRaiting(String ?id, int raiting, email)async{
     try{
       final current_article = await articles_references.doc(id);
       current_article.update({
-        'raiting':raiting-=1
+        'raiting':
+        FieldValue.arrayRemove([
+          email
+        ])
       });
       print('execute command');
     }

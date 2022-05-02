@@ -46,13 +46,13 @@ class _ArticleDetailState extends State<ArticleDetail> {
                   Text('${data.value.subject}'),
                   //Obx(()=>Text('${controller.raiting_cont}'),),
                   Obx(
-                    () => Text('${data.value.raiting}'),
+                    () => Text('${data.value.raiting!.length}'),
                   ),
                   IconButton(
                       onPressed: () {
                         print('clicked up');
                         controller.vouteAppRaiting(
-                            data.value.id, data.value.raiting);
+                            data.value.id, data.value.raiting!.length);
                         setState(() {
                           dataFuture = controller
                               .getArticleWithId(Get.arguments.toString());
@@ -63,7 +63,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                       onPressed: () {
                         print('clicked down');
                         controller.vouteDownRaiting(
-                            data.value.id, data.value.raiting);
+                            data.value.id, data.value.raiting!.length);
                         setState(() {
                           dataFuture = controller
                               .getArticleWithId(Get.arguments.toString());

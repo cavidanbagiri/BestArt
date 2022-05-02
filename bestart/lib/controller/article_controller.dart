@@ -36,14 +36,13 @@ class ArticleController extends GetxController{
     title_controller = TextEditingController();
     subject_controller = TextEditingController();
     article_model_list?.bindStream(_article_service.getArticles());
-    // print('article cont work and ${current_user.read('email')}');
     super.onInit();
   }
 
   //Voute App
   Future<void> vouteAppRaiting(String ?id, int raiting)async{
     try{
-      await _article_service.vouteAppRaiting(id, raiting);
+      await _article_service.vouteAppRaiting(id, raiting, auth.currentUser!.email.toString());
     }
     catch(e){
       print('upp error');
@@ -54,7 +53,7 @@ class ArticleController extends GetxController{
   //Voute App
   Future<void> vouteDownRaiting(String ?id, int raiting)async{
     try{
-      await _article_service.vouteDownRaiting(id, raiting);
+      await _article_service.vouteDownRaiting(id, raiting, auth.currentUser!.email.toString());
     }catch(e){
       print('down error');
     }

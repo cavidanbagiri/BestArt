@@ -37,14 +37,14 @@ class EachArticleWidget extends GetView<ArticleController> {
                     IconButton(
                         onPressed: () {
                           controller.vouteAppRaiting(
-                              model?.id, model!.raiting);
+                              model?.id, model!.raiting.length);
                         },
                         icon: const Icon(Icons.arrow_upward)),
-                    Obx(()=>Text('${controller.article_model_list![index!].raiting}')),
+                    Obx(()=>Text('${controller.article_model_list![index!].raiting!.length}')),
                     IconButton(
                         onPressed: () {
                           controller.vouteDownRaiting(
-                              model?.id, model!.raiting);
+                              model?.id, model!.raiting.length);
                         },
                         icon: const Icon(Icons.arrow_downward)),
                   ],

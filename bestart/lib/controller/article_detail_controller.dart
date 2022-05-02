@@ -34,9 +34,9 @@ class ArticleDetailController extends GetxController{
   }
 
   //Raiting Up
-  Future<void> vouteAppRaiting(String ?id, int raiting)async{
+  Future<void> vouteAppRaiting(String ?id, int ?raiting)async{
     try{
-      await _article_service.vouteAppRaiting(id, raiting);
+      await _article_service.vouteAppRaiting(id, raiting!, auth.currentUser!.email.toString());
     }
     catch(e){
       print('upp error ${e}');
@@ -45,9 +45,9 @@ class ArticleDetailController extends GetxController{
   }
 
   //Raiting Down
-  Future<void> vouteDownRaiting(String ?id, int raiting)async{
+  Future<void> vouteDownRaiting(String ?id, int ?raiting)async{
     try{
-      await _article_service.vouteDownRaiting(id, raiting);
+      await _article_service.vouteDownRaiting(id, raiting!, auth.currentUser!.email.toString());
     }catch(e){
       print('down error ${e}');
     }

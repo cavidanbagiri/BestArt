@@ -6,7 +6,7 @@ class ArticleModel {
   String ? id;
   String ? title;
   String ? subject;
-  int raiting=0;
+  List ? raiting;
   String ? email;
   List ? comments;
 
