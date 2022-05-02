@@ -1,5 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../models/article_model.dart';
@@ -9,23 +10,30 @@ class ArticleDetailController extends GetxController{
   //Create an Auth Service
   final _article_service = ArticleService();
 
-  //Create Controller
-  TextEditingController? title_controller;
-  TextEditingController? subject_controller;
-
+  //Take Current Article and equal this val
   late Rx<ArticleModel> temp;
+
+  //Create Comment Controller
+  var comment_controller ;
+
+  //For Taking email
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   CollectionReference articles_references =
   FirebaseFirestore.instance.collection('allarticles');
 
   @override
   onInit(){
-    title_controller = TextEditingController();
-    subject_controller = TextEditingController();
+    comment_controller = TextEditingController();
     super.onInit();
   }
 
-  //Voute App
+  //Add Comment
+  Future<void> addComment(String ?id, String comment)async{
+    _article_service.saddComment(id, comment, auth.currentUser!.email.toString());
+  }
+
+  //Raiting Up
   Future<void> vouteAppRaiting(String ?id, int raiting)async{
     try{
       await _article_service.vouteAppRaiting(id, raiting);
@@ -36,7 +44,7 @@ class ArticleDetailController extends GetxController{
     //update();
   }
 
-
+  //Raiting Down
   Future<void> vouteDownRaiting(String ?id, int raiting)async{
     try{
       await _article_service.vouteDownRaiting(id, raiting);
@@ -56,8 +64,6 @@ class ArticleDetailController extends GetxController{
 
   @override
   void onClose() {
-    title_controller?.dispose();
-    subject_controller?.dispose();
     super.onClose();
   }
 

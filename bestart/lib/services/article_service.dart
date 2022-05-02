@@ -41,18 +41,28 @@ class ArticleService {
   //Read With Article
   @deprecated
   Future<Rx<ArticleModel>> getArticleWithId(String id)async{
-    // print('bura isledi ///////////////////////////////////');
-    // temp = await _article_service.getArticleWithId(id) as Rx<ArticleModel?>;
-    // print('ama bura yox');
-    // print(' value is ${temp.value?.title}');
-    // return temp as Rx<ArticleModel>;
-    //return await _article_service.getArticleWithId(id) as Rx<ArticleModel?>;
     final current_article = await articles_references.doc(id);
     final snapshot = await current_article.get();
     return ArticleModel.readData(snapshot).obs;
     //await _article_service.getArticleWithId(id);
   }
 
+  //Add Comment
+  Future<void> saddComment(String ?id, String comment, String email)async{
+    try{
+      final current_article = await articles_references.doc(id);
+      current_article.update(
+        {'comments' :
+          FieldValue.arrayUnion(
+            [{email:comment}]
+          )
+        }
+      );
+    }
+    catch(e){
+      print('Comment adding error os ${e}');
+    }
+  }
 
   //Voute App
   Future<void> vouteAppRaiting(String ?id, int raiting)async{
