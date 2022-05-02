@@ -64,6 +64,10 @@ class _ArticleDetailState extends State<ArticleDetail> {
                         print('clicked down');
                         controller.vouteDownRaiting(
                             data.value.id, data.value.raiting);
+                        setState(() {
+                          dataFuture = controller
+                              .getArticleWithId(Get.arguments.toString());
+                        });
                       },
                       icon: Icon(Icons.arrow_downward)),
                   TextField(
@@ -74,9 +78,23 @@ class _ArticleDetailState extends State<ArticleDetail> {
                   ),
                   TextButton(
                     onPressed: () {
-                      controller.addComment(data.value.id, controller.comment_controller.text);
+                      controller.addComment(
+                          data.value.id, controller.comment_controller.text);
+                      setState(() {
+                        dataFuture = controller
+                            .getArticleWithId(Get.arguments.toString());
+                      });
                     },
                     child: Text('Post Comment'),
+                  ),
+                  Container(
+                    height: 300,
+                    child: ListView.builder(
+                      itemCount: data.value.comments?.length,
+                      itemBuilder: ((context, index) {
+                        return Text('${data.value.comments?[index]}');
+                      }),
+                    ),
                   ),
                 ],
               );

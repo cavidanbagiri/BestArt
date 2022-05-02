@@ -8,8 +8,9 @@ class ArticleModel {
   String ? subject;
   int raiting=0;
   String ? email;
+  List ? comments;
 
-  ArticleModel(this.id, this.title, this.subject, this.raiting, this.email);
+  ArticleModel(this.id, this.title, this.subject, this.raiting, this.email, this.comments);
 
   //Read data contructor
   ArticleModel.readData(DocumentSnapshot snapshot){
@@ -18,6 +19,7 @@ class ArticleModel {
     subject = snapshot['subject'];
     email = snapshot['email'];
     raiting = snapshot['raiting'];
+    comments = snapshot['comments'];
   }
 
 }
